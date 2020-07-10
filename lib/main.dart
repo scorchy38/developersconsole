@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:chat_list/chat_list.dart';
 import 'package:developersconsole/Screens/chat_screen.dart';
+import 'package:developersconsole/Screens/new_chat_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/models/persisten-bottom-nav-item.widget.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> _buildScreens() {
-      return [MyHomePage(), ChatScreen()];
+      return [Chat(), ChatScreen()];
     }
 
     List<PersistentBottomNavBarItem> _navBarsItems() {
