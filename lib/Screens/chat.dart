@@ -1,6 +1,7 @@
 import 'package:developersconsole/classes/developer_profile.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:ntp/ntp.dart';
 
 class Chat extends StatefulWidget {
   Developer dev;
@@ -64,7 +65,7 @@ class _ChatState extends State<Chat> {
 //                      ),
                       child: Row(
                         children: <Widget>[
-                          Text('${messages[index]['Sender']} : '),
+                          Text('${messages[index]['Time Stamp']} : '),
                           Text(messages[index]['Text'])
                         ],
                       ),
@@ -114,18 +115,19 @@ class _ChatState extends State<Chat> {
                       Container(
                         child: IconButton(
                           icon: Icon(Icons.send),
-                          onPressed: () {
+                          onPressed: () async {
+                            var now = await NTP.now();
                             if (controller.text != null) {
                               ref.child('messages').push().set({
                                 'Text': controller.text,
                                 'Sender': widget.userPhNo,
-                                'Time Stamp': DateTime.now().toString(),
+                                'Time Stamp': now.toString(),
                                 'Reciever': widget.dev.phone
                               }).then((value) => controller.clear());
                             } else {
                               print('No Message');
                             }
-                            print('object');
+                            print(now.toString());
                           },
                         ),
                       )
