@@ -114,10 +114,10 @@ class _ChatState extends State<Chat> {
                             if (controller.text != null) {
                               ref.child('messages').push().set({
                                 'Text': controller.text,
-                                'Sender': '6398256972',
+                                'Sender': widget.userPhNo,
                                 'Time Stamp': DateTime.now().toString(),
                                 'Reciever': widget.dev.phone
-                              });
+                              }).then((value) => controller.clear());
                             } else {
                               print('No Message');
                             }
