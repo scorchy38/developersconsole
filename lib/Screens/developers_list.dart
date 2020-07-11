@@ -89,7 +89,7 @@ class _DevelopersListState extends State<DevelopersList> {
             Container(
                 child: ProfileCard(
               dev: Developer(
-                  name: 'Aviral / Shubh',
+                  name: 'Axact Studios',
                   category: 'Management',
                   phone: 'axact'),
               userPhNo: widget.userPhNo,
