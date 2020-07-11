@@ -47,6 +47,10 @@ class _ChatState extends State<Chat> {
                     messages.add(msg);
                   }
                 }
+                Comparator timeComparator =
+                    (a, b) => a['Time Stamp'].compareTo(b['Time Stamp']);
+                messages.sort(timeComparator);
+
                 return ListView.builder(
                   reverse: true,
                   itemCount: messages.length,
