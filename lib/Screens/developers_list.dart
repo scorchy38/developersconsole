@@ -88,8 +88,12 @@ class _DevelopersListState extends State<DevelopersList> {
             ),
             Container(
                 child: ProfileCard(
-                    dev: Developer(
-                        name: 'Owner', category: 'Head', phone: '12121212'))),
+              dev: Developer(
+                  name: 'Aviral / Shubh',
+                  category: 'Management',
+                  phone: 'axact'),
+              userPhNo: widget.userPhNo,
+            )),
             SizedBox(
               height: 30,
             )
