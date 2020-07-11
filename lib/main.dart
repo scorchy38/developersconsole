@@ -1,40 +1,60 @@
-import 'dart:async';
-import 'dart:io';
-
-import 'package:chat_list/chat_list.dart';
+import 'package:developersconsole/Screens/chat.dart';
 import 'package:developersconsole/Screens/chat_screen.dart';
-import 'package:developersconsole/Screens/new_chat_screen.dart';
+import 'package:developersconsole/Screens/login_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/models/persisten-bottom-nav-item.widget.dart';
 import 'package:persistent_bottom_nav_bar/models/persistent-bottom-nav-bar-styles.widget.dart';
 import 'package:persistent_bottom_nav_bar/models/persistent-nav-bar-scaffold.widget.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-//import 'package:intl/intl.dart';
-void main() => runApp(MyApp());
+import 'Screens/developers_list.dart';
+import 'Screens/home_screen.dart';
 
-class MyApp extends StatelessWidget {
+void main() => runApp(NewApp());
+getLoginStatus() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  //Return String
+  String stringValue = prefs.getString('stringValue');
+  return stringValue;
+}
+
+class NewApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var status = getLoginStatus();
+    return MaterialApp(
+      home: status == 'LoggedIn' ? MainHome() : LoginScreen(),
+    );
+  }
+}
+
+class MainHome extends StatelessWidget {
+  String userPhNo;
+  MainHome({this.userPhNo});
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     List<Widget> _buildScreens() {
-      return [Chat(), ChatScreen()];
+      return [HomeScreen(), DevelopersList(userPhNo: userPhNo)];
     }
 
     List<PersistentBottomNavBarItem> _navBarsItems() {
       return [
         PersistentBottomNavBarItem(
-          icon: Icon(CupertinoIcons.home),
+          icon: Icon(
+            CupertinoIcons.home,
+          ),
           title: ("Home"),
-          activeColor: CupertinoColors.activeBlue,
-          inactiveColor: CupertinoColors.systemGrey,
+          activeColor: Colors.white,
+          inactiveColor: Color(0xFF970101),
         ),
         PersistentBottomNavBarItem(
-          icon: Icon(CupertinoIcons.settings),
-          title: ("Settings"),
-          activeColor: CupertinoColors.activeBlue,
-          inactiveColor: CupertinoColors.systemGrey,
+          icon: Icon(Icons.message),
+          title: ("Chats"),
+          activeColor: Colors.white,
+          inactiveColor: Color(0xFF970101),
         ),
       ];
     }
@@ -43,6 +63,7 @@ class MyApp extends StatelessWidget {
         PersistentTabController(initialIndex: 0);
     return MaterialApp(
       home: PersistentTabView(
+        backgroundColor: Colors.black,
         controller: _controller,
         items: _navBarsItems(),
         screens: _buildScreens(),
@@ -52,30 +73,11 @@ class MyApp extends StatelessWidget {
         handleAndroidBackButtonPress: true,
         iconSize: 26.0,
         navBarStyle:
-            NavBarStyle.style1, // Choose the nav bar style with this property
+            NavBarStyle.style6, // Choose the nav bar style with this property
         onItemSelected: (index) {
           print(index);
         },
       ),
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-    );
-    // TODO: implement build
-    throw UnimplementedError();
   }
 }

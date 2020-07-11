@@ -136,10 +136,10 @@ class _ChatScreenState extends State<ChatScreen> {
                       onPressed: () {
                         if (controller.text != null) {
                           ref.child('messages').push().set({
-                            'text': controller.text,
-                            'sender': 'Avi',
+                            'Text': controller.text,
+                            'Sender': '6398256972',
                             'Time Stamp': DateTime.now().toString(),
-                            'Reciever': recieverID
+                            'Reciever': '6398415557'
                           });
                         } else {
                           print('No Message');
