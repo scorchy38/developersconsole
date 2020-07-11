@@ -1,3 +1,6 @@
+import 'package:bubble/bubble.dart';
+import 'package:chat_list/chat_list.dart';
+import 'package:developersconsole/Widgets/message.dart';
 import 'package:developersconsole/classes/developer_profile.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -49,27 +52,30 @@ class _ChatState extends State<Chat> {
                   }
                 }
                 Comparator timeComparator =
-                    (a, b) => a['Time Stamp'].compareTo(b['Time Stamp']);
+                    (a, b) => b['Time Stamp'].compareTo(a['Time Stamp']);
                 messages.sort(timeComparator);
 
                 return ListView.builder(
                   reverse: true,
                   itemCount: messages.length,
                   itemBuilder: (context, index) {
-                    return Container(
-                      color: Colors.white,
-//                      child: ListTile(
-//                        title: Text(item[index]['Text']),
-//                        trailing: Text(item[index]["Sender"]),
-//
-//                      ),
-                      child: Row(
-                        children: <Widget>[
-                          Text('${messages[index]['Time Stamp']} : '),
-                          Text(messages[index]['Text'])
-                        ],
-                      ),
-                    );
+                    return messages[index]['Sender'] == widget.userPhNo
+                        ? Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Bubble(
+                              alignment: Alignment.centerRight,
+                              nip: BubbleNip.rightTop,
+                              child: Text(messages[index]['Text']),
+                            ),
+                          )
+                        : Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Bubble(
+                              alignment: Alignment.centerLeft,
+                              nip: BubbleNip.leftTop,
+                              child: Text('adsss'),
+                            ),
+                          );
                   },
                 );
               } else
@@ -93,6 +99,8 @@ class _ChatState extends State<Chat> {
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
                             decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
                                 color: Colors.white.withOpacity(0.5)),
                             width: double.infinity,
                             child: Padding(
@@ -114,7 +122,10 @@ class _ChatState extends State<Chat> {
                       ),
                       Container(
                         child: IconButton(
-                          icon: Icon(Icons.send),
+                          icon: Icon(
+                            Icons.send,
+                            color: Colors.white,
+                          ),
                           onPressed: () async {
                             var now = await NTP.now();
                             if (controller.text != null) {
