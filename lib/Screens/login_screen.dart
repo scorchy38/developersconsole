@@ -88,6 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 10.0),
                         child: TextField(
+                          obscureText: true,
                           controller: password,
                           decoration: InputDecoration(
                             focusColor: Colors.black,

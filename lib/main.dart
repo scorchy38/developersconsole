@@ -1,5 +1,4 @@
 import 'package:developersconsole/Screens/chat.dart';
-import 'package:developersconsole/Screens/chat_screen.dart';
 import 'package:developersconsole/Screens/login_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +24,7 @@ class NewApp extends StatelessWidget {
   Widget build(BuildContext context) {
     var status = getLoginStatus();
     return MaterialApp(
+      theme: ThemeData(canvasColor: Colors.blue),
       home: status == 'LoggedIn' ? MainHome() : LoginScreen(),
     );
   }
@@ -44,17 +44,17 @@ class MainHome extends StatelessWidget {
       return [
         PersistentBottomNavBarItem(
           icon: Icon(
-            CupertinoIcons.home,
+            Icons.home,
           ),
           title: ("Home"),
           activeColor: Colors.white,
-          inactiveColor: Color(0xFF970101),
+          inactiveColor: Colors.white,
         ),
         PersistentBottomNavBarItem(
           icon: Icon(Icons.message),
           title: ("Chats"),
           activeColor: Colors.white,
-          inactiveColor: Color(0xFF970101),
+          inactiveColor: Colors.white,
         ),
       ];
     }
@@ -63,7 +63,7 @@ class MainHome extends StatelessWidget {
         PersistentTabController(initialIndex: 0);
     return MaterialApp(
       home: PersistentTabView(
-        backgroundColor: Colors.black,
+        backgroundColor: Color(0xFF970101),
         controller: _controller,
         items: _navBarsItems(),
         screens: _buildScreens(),
@@ -73,7 +73,7 @@ class MainHome extends StatelessWidget {
         handleAndroidBackButtonPress: true,
         iconSize: 26.0,
         navBarStyle:
-            NavBarStyle.style6, // Choose the nav bar style with this property
+            NavBarStyle.style9, // Choose the nav bar style with this property
         onItemSelected: (index) {
           print(index);
         },
