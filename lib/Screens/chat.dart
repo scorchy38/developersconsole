@@ -1,6 +1,4 @@
 import 'package:bubble/bubble.dart';
-import 'package:chat_list/chat_list.dart';
-import 'package:developersconsole/Widgets/message.dart';
 import 'package:developersconsole/classes/developer_profile.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -138,7 +136,7 @@ class _ChatState extends State<Chat> {
                             } else {
                               print('No Message');
                             }
-                            print(now.toString());
+                            print(widget.userPhNo.toString());
                           },
                         ),
                       )

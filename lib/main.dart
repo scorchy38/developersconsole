@@ -15,7 +15,7 @@ void main() => runApp(NewApp());
 getLoginStatus() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   //Return String
-  String stringValue = prefs.getString('stringValue');
+  String stringValue = prefs.getString('status');
   return stringValue;
 }
 
